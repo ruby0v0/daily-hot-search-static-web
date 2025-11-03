@@ -3,10 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { HotSearchDataItem } from '@/api/common/types';
 import {
-	fetchWeiboHotSearchList,
-	fetchBilibiliHotSearchList,
-	fetchJujinHotSearchList,
-} from '@/api/hotSearch';
+	fetchWeiboData,
+	fetchBilibiliData,
+} from '@/api/hot';
 import { useLoading } from '@/hook';
 import AppIcon from '@/components/App/Icon';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -119,18 +118,18 @@ function Home() {
 		{
 			icon: { name: 'icon-[ant-design--weibo-outlined]', color: '#d81e06' },
 			title: '微博',
-			fetchData: async () => await fetchWeiboHotSearchList(),
+			fetchData: async () => await fetchWeiboData(),
 		},
 		{
 			icon: { name: 'icon-[ant-design--bilibili-filled]', color: '#EB5480' },
 			title: 'bilibili',
-			fetchData: async () => await fetchBilibiliHotSearchList(),
+			fetchData: async () => await fetchBilibiliData(),
 		},
-		{
-			icon: { name: 'icon-[tabler--brand-juejin]', color: '#007fff' },
-			title: '掘金',
-			fetchData: async () => await fetchJujinHotSearchList(),
-		},
+		// {
+		// 	icon: { name: 'icon-[tabler--brand-juejin]', color: '#007fff' },
+		// 	title: '掘金',
+		// 	fetchData: async () => await fetchJuejinData(),
+		// },
 	];
 
 	return (

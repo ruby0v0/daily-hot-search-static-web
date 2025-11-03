@@ -5,6 +5,12 @@ import { HotSearchDataItem } from '@/api/common/types';
 import {
 	fetchWeiboData,
 	fetchBilibiliData,
+	fetchDouyinData,
+	fetchRedNoteData,
+	fetchZhihuData,
+	fetchBaiduData,
+	fetchToutiaoData,
+	fetchDongchediData,
 } from '@/api/hot';
 import { useLoading } from '@/hook';
 import AppIcon from '@/components/App/Icon';
@@ -51,17 +57,17 @@ function HotSearchDataList({
 									return (
 										<div
 											className='w-full flex items-center cursor-pointer'
-											key={item.id}
+											key={index}
 										>
 											<Badge
 												className={getBadgeColorClassName(index)}
 												variant='secondary'
 											>
-												{item.id}
+												{index}
 											</Badge>
 											<span
 												className='inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium underline-offset-4 hover:underline'
-												onClick={() => window.open(item.url, '_blank')}
+												onClick={() => window.open(item.link, '_blank')}
 											>
 												{item.title}
 											</span>
@@ -85,7 +91,7 @@ function HotSearchSection({
 	title,
 	fetchData,
 }: {
-	icon: { name: string; color?: string };
+	icon: string;
 	title: string;
 	fetchData: () => Promise<HotSearchDataItem[]>;
 }) {
@@ -107,7 +113,7 @@ function HotSearchSection({
 
 	return (
 		<HotSearchDataList list={list} loading={loading}>
-			<AppIcon className='mr-2' name={icon.name} color={icon?.color} />
+			<AppIcon className='mr-2' name={icon} />
 			{title}
 		</HotSearchDataList>
 	);
@@ -116,20 +122,45 @@ function HotSearchSection({
 function Home() {
 	const sections = [
 		{
-			icon: { name: 'icon-[ant-design--weibo-outlined]', color: '#d81e06' },
+			icon: '',
+			title: '抖音',
+			fetchData: async () => await fetchDouyinData(),
+		},
+		{
+			icon: '',
+			title: '小红书',
+			fetchData: async () => await fetchRedNoteData(),
+		},
+		{
+			icon: '',
+			title: '哔哩哔哩',
+			fetchData: async () => await fetchBilibiliData(),
+		},
+		{
+			icon: '',
 			title: '微博',
 			fetchData: async () => await fetchWeiboData(),
 		},
 		{
-			icon: { name: 'icon-[ant-design--bilibili-filled]', color: '#EB5480' },
-			title: 'bilibili',
-			fetchData: async () => await fetchBilibiliData(),
+			icon: '' ,
+			title: '百度',
+			fetchData: async () => await fetchBaiduData(),
 		},
-		// {
-		// 	icon: { name: 'icon-[tabler--brand-juejin]', color: '#007fff' },
-		// 	title: '掘金',
-		// 	fetchData: async () => await fetchJuejinData(),
-		// },
+		{
+			icon: '',
+			title: '今日头条',
+			fetchData: async () => await fetchToutiaoData(),
+		},
+		{
+			icon: '',
+			title: '知乎',
+			fetchData: async () => await fetchZhihuData(),
+		},
+		{
+			icon: '',
+			title: '懂车帝',
+			fetchData: async () => await fetchDongchediData(),
+		},
 	];
 
 	return (

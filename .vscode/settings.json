@@ -3,7 +3,10 @@
     "weibo",
     "bili",
     "bilibili",
-    "juejin"
+    "rednote",
+    "toutiao",
+    "dongchedi",
+    "netease",
   ],
   // Disable the default formatter, use eslint instead
   "prettier.enable": false,
